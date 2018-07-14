@@ -34,11 +34,11 @@ def collect_stats(input_file):
                     dnamerecord[d].add((row['prescriber_first_name'], row['prescriber_last_name']))
 
                 float_drug_cost = float(row['drug_cost'])
-                float_total_cost = float(outputdict[d]['total_cost'])
+                float_total_cost = outputdict[d]['total_cost']
                 outputdict[d]['total_cost'] = float_drug_cost + float_total_cost           
         
             else:
-                outputdict[d] = {'num_prescriber' : 1, 'total_cost' : row['drug_cost']}
+                outputdict[d] = {'num_prescriber' : 1, 'total_cost' : float(row['drug_cost'])}
                 dnamerecord[d].add((row['prescriber_first_name'], row['prescriber_last_name']))
     return outputdict
     
@@ -53,7 +53,7 @@ def dump_stats(output_dict, output_file):
         thewriter = csv.writer(w)
         thewriter.writerow(['drug_name', 'num_prescriber', 'total_cost'])
         for medicine in ordered_output:
-            thewriter.writerow([medicine, ordered_output[medicine]['num_prescriber'], ordered_output[medicine]['total_cost']])     
+            thewriter.writerow([medicine, ordered_output[medicine]['num_prescriber'], ('%.2f' % ordered_output[medicine]['total_cost']).rstrip('0').rstrip('.')])     
             
 
 def count(input_file, output_file):
