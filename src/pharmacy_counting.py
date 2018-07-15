@@ -9,7 +9,6 @@ Author: Nayoon Woo (nayoonwoo8899@gmail.com)
 
 
 import csv
-import os
 import sys
 from collections import OrderedDict
 from collections import defaultdict
