@@ -50,7 +50,7 @@ def dump_stats(output_dict, output_file):
 
     ordered_output = OrderedDict(sorted(output_dict.items(), key=lambda x: (-float(x[1]['total_cost']), x[0])))
     with open(output_file, 'w') as w:
-        thewriter = csv.writer(w)
+        thewriter = csv.writer(w, lineterminator = '\n')
         thewriter.writerow(['drug_name', 'num_prescriber', 'total_cost'])
         for medicine in ordered_output:
             thewriter.writerow([medicine, ordered_output[medicine]['num_prescriber'], ('%.2f' % ordered_output[medicine]['total_cost']).rstrip('0').rstrip('.')])     
